@@ -1,0 +1,19 @@
+flowchart TD
+    A([Alerta do monitoramento ou chamado do usuário]) --> B[Registrar o incidente]
+    B --> C[Classificar impacto e urgência]
+    C --> D{Prioridade}
+    D -- P1 ou P2 --> E[Acionar responsável de plantão<br/>e abrir sala de crise]
+    D -- P3 ou P4 --> F[Atendimento pela fila<br/>do Service Desk]
+    E --> G{Contingência<br/>disponível?}
+    G -- Sim --> H[Ativar contingência<br/>e informar as áreas afetadas]
+    G -- Não --> I[Diagnosticar e<br/>escalar a especialistas]
+    H --> I
+    F --> J{Resolvido no<br/>primeiro nível?}
+    J -- Não --> I
+    J -- Sim --> K[Restaurar o serviço]
+    I --> K
+    K --> L[Validar com o usuário<br/>e encerrar o incidente]
+    L --> M{P1, P2 ou<br/>recorrente?}
+    M -- Sim --> N[Análise pós-incidente<br/>e plano de ação]
+    M -- Não --> O([Atualizar indicadores])
+    N --> O
